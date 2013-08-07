@@ -161,6 +161,12 @@ namespace SetupTv.Sections
         mpComboBoxLog.SelectedIndex = Convert.ToInt32(layer.GetSetting("loglevel", "5").Value) - 2;
         //default is debug=5 but first two options in enum (none and critical) are not used so offset by 2
         _logLevelStart = (LogLevel) (mpComboBoxLog.SelectedIndex + 2); // Store logLevel value
+
+        //Pre Release part, need to be comment out for official build (next 4 lines)
+        mpComboBoxLog.SelectedIndex = 3;
+        _logLevel = (LogLevel)(5); // Force log levels to Debug for Pre Release
+        Log.SetLogLevel(_logLevel);
+        mpComboBoxLog.Enabled = false;
       }
       catch (Exception)
       {
